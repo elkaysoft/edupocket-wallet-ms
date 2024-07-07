@@ -28,6 +28,11 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
             NickName = nickName;
         }
 
+        public void RemoveBeneficiary()
+        {
+
+        }
+
         //protected bool Equals(Beneficiary other)
         //{
         //    return string.Equals(Name, other.Name) && string.Equals(WalletNumber, other.WalletNumber) && string.Equals(NickName, other.NickName);

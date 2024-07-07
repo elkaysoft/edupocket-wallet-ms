@@ -41,6 +41,10 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
 
         public Wallet CreateWallet(Guid profileId, Guid walletSchemeId, string walletNumber)
         {
+            if (string.IsNullOrEmpty(walletNumber)) throw new ArgumentException("Wallet number is required");
+            if (walletSchemeId == Guid.Empty) throw new ArgumentException("Wallet Scheme Id is required");
+            if (profileId == Guid.Empty) throw new ArgumentException("Profile Id is required");
+
             var userWallet = Wallet.Create(profileId, walletSchemeId, walletNumber);
             userWallet.GetCheckSum();
             return userWallet;
@@ -52,7 +56,28 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
 
             Wallet.BalanceUpdate(balance);
         }
+
+        public void Update(string firstName, string lastName, string otherName, string emailAddress, string mobileNumber)
+        {
+            if (string.IsNullOrEmpty(firstName)) throw new ArgumentException("First Name is required");
+            if (string.IsNullOrEmpty(lastName)) throw new ArgumentException("Last Name is required");
+            if (string.IsNullOrEmpty(emailAddress)) throw new ArgumentException("Email Address is required");
+            if (string.IsNullOrEmpty(firstName)) throw new ArgumentException("Mobile Number is required");
+
+            FirstName = firstName;
+            LastName = lastName;
+            OtherName = otherName;
+            EmailAddress = emailAddress;
+            MobileNumber = mobileNumber;
+        }
        
+        public void UpdateProfileImage(string imageUrl)
+        {
+            if (string.IsNullOrEmpty(imageUrl)) throw new ArgumentException("Image URL is required");
+
+            ProfileImage = imageUrl;
+        }
+
 
         public Beneficiary AddBeneficiary(string name, string walletNum, string nickName)
         {
@@ -62,6 +87,7 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
 
            return new Beneficiary(name, walletNum, nickName);   
         }
+
 
         
 

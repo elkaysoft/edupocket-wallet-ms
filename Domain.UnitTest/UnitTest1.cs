@@ -68,5 +68,44 @@ namespace Domain.UnitTest
             ArgumentException exception = Assert.Throws<ArgumentException>(act);
         }
 
+        [Fact]
+        public void Ensure_Wallet_Creation_throw_exception_when_profileId_is_empty()
+        {
+            //arrange
+            var profile = new Profile(Guid.NewGuid());
+
+            //act
+            Action act = () => profile.CreateWallet(Guid.Empty, Guid.NewGuid(), "7038704611");
+
+            //asert
+            ArgumentException exception = Assert.Throws<ArgumentException>(act);
+        }
+
+        [Fact]
+        public void Ensure_Wallet_Creation_throw_exception_when_walletScheme_is_empty()
+        {
+            //arrange
+            var profile = new Profile(Guid.NewGuid());
+
+            //act
+            Action act = () => profile.CreateWallet(Guid.NewGuid(), Guid.Empty, "7038704611");
+
+            //asert
+            ArgumentException exception = Assert.Throws<ArgumentException>(act);
+        }
+
+        [Fact]
+        public void Ensure_Wallet_Creation_throw_exception_when_walletNumber_is_empty()
+        {
+            //arrange
+            var profile = new Profile(Guid.NewGuid());
+
+            //act
+            Action act = () => profile.CreateWallet(Guid.NewGuid(), Guid.NewGuid(), string.Empty);
+
+            //asert
+            ArgumentException exception = Assert.Throws<ArgumentException>(act);
+        }
+
     }
 }
