@@ -44,6 +44,8 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
             if (string.IsNullOrEmpty(walletNumber)) throw new ArgumentException("Wallet number is required");
             if (walletSchemeId == Guid.Empty) throw new ArgumentException("Wallet Scheme Id is required");
             if (profileId == Guid.Empty) throw new ArgumentException("Profile Id is required");
+            if (walletNumber.Length < 10) throw new ArgumentException("Wallet Number must be 10 digits");
+            if (int.Parse(walletNumber) < 0) throw new ArgumentException("Invalid Wallet number");
 
             var userWallet = Wallet.Create(profileId, walletSchemeId, walletNumber);
             userWallet.GetCheckSum();

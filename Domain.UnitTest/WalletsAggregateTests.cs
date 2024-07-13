@@ -3,7 +3,7 @@ using Edupocket.Domain.AggregatesModel.WalletAggregate;
 
 namespace Domain.UnitTest
 {
-    public class UnitTest1
+    public class WalletsAggregateTests
     {
         [Fact]
         public void Ensure_profile_creation_returns_null()
@@ -106,6 +106,61 @@ namespace Domain.UnitTest
             //asert
             ArgumentException exception = Assert.Throws<ArgumentException>(act);
         }
+
+        [Fact]
+        public void Ensure_Wallet_Creation_Throws_Exception_When_Less_Than_Ten_Digits()
+        {
+            //Arrange
+            var profile = new Profile(Guid.NewGuid());
+
+            //Act
+            Action act = () => profile.CreateWallet(Guid.NewGuid(), Guid.NewGuid(), "123456789");
+
+            //Assert
+            ArgumentException exception = Assert.Throws<ArgumentException>(act);
+        }
+
+        [Fact]
+        public void Ensure_Beneficiary_WithNoName_Throws_Exception()
+        {
+            //Arrange
+            var profile = new Profile(Guid.NewGuid());
+
+            //Act
+            Action act = () => profile.AddBeneficiary(string.Empty, "0299202091", "Ajoks");
+
+            //Assert
+            ArgumentException exception = Assert.Throws<ArgumentException>(act);
+        }
+
+        [Fact]
+        public void Ensure_Beneficiary_WithNoWalletNumber_Throws_Exception()
+        {
+            //Arrange
+            var profile = new Profile(Guid.NewGuid());
+
+            //Act
+            Action act = () => profile.AddBeneficiary("Ajoke Salawu", "", "Ajoks");
+
+            //Assert
+            ArgumentException exception = Assert.Throws<ArgumentException>(act);
+        }
+
+
+        [Fact]
+        public void Beneficiary_Equals_ReturnsTrue_ForEqualValues()
+        {
+            //Arrange
+            var profile = new Profile(Guid.NewGuid());
+
+            //Act
+            var beneficiary1 = profile.AddBeneficiary("Joke", "1203920391", "Ajoks");
+            var beneficiary2 = profile.AddBeneficiary("Joke", "1203920391", "ajoks");
+
+            //Assert
+            Assert.Equal(beneficiary1, beneficiary2);
+        }
+
 
     }
 }
