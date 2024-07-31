@@ -11,8 +11,7 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
         public Guid ProfileId { get; private set; }
         public Status Status { get; private set; }
         public string CheckSum { get; private set; }
-        public bool IsPndActive { get; private set; }
-        public Guid WalletSchemeId { get; private set; }
+        public bool IsPndActive { get; private set; }        
 
         public Wallet(Guid id): base(id)
         {            
@@ -21,12 +20,11 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
         private Wallet(): base(Guid.NewGuid())  // required by EF
         { }
 
-        public static Wallet Create(Guid profileId, Guid walletSchemeId, string walletNumber)
+        public static Wallet Create(Guid profileId, string walletNumber)
         {
             Wallet wallet = new Wallet()
             {
-                ProfileId = profileId,
-                WalletSchemeId = walletSchemeId,
+                ProfileId = profileId,                
                 IsPndActive = true,
                 Status = Status.Active,
                 Balance = 0
