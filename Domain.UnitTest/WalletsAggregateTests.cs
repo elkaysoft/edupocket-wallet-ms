@@ -21,7 +21,7 @@ namespace Domain.UnitTest
         {
             //arrange            
             var profileDto = new ProfileCreationDTO("Olamilekan", "Sheriff", "", "elkaysoft@yahoo.com", "07038704611",
-                "Male", ProfileType.Student, "");
+                "Male", ProfileType.Student);
             //act
             var profile = Profile.Create(profileDto);
 
@@ -75,7 +75,7 @@ namespace Domain.UnitTest
             var profile = new Profile(Guid.NewGuid());
 
             //act
-            Action act = () => profile.CreateWallet(Guid.Empty, Guid.NewGuid(), "7038704611");
+            Action act = () => profile.CreateWallet(Guid.Empty, "7038704611");
 
             //asert
             ArgumentException exception = Assert.Throws<ArgumentException>(act);
@@ -88,7 +88,7 @@ namespace Domain.UnitTest
             var profile = new Profile(Guid.NewGuid());
 
             //act
-            Action act = () => profile.CreateWallet(Guid.NewGuid(), Guid.Empty, "7038704611");
+            Action act = () => profile.CreateWallet(Guid.NewGuid(), "7038704611");
 
             //asert
             ArgumentException exception = Assert.Throws<ArgumentException>(act);
@@ -101,7 +101,7 @@ namespace Domain.UnitTest
             var profile = new Profile(Guid.NewGuid());
 
             //act
-            Action act = () => profile.CreateWallet(Guid.NewGuid(), Guid.NewGuid(), string.Empty);
+            Action act = () => profile.CreateWallet(Guid.NewGuid(), string.Empty);
 
             //asert
             ArgumentException exception = Assert.Throws<ArgumentException>(act);
@@ -114,7 +114,7 @@ namespace Domain.UnitTest
             var profile = new Profile(Guid.NewGuid());
 
             //Act
-            Action act = () => profile.CreateWallet(Guid.NewGuid(), Guid.NewGuid(), "123456789");
+            Action act = () => profile.CreateWallet(Guid.NewGuid(), "123456789");
 
             //Assert
             ArgumentException exception = Assert.Throws<ArgumentException>(act);

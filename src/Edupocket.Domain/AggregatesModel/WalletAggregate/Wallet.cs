@@ -25,24 +25,14 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
             Wallet wallet = new Wallet()
             {
                 ProfileId = profileId,                
-                IsPndActive = true,
+                IsPndActive = true, //pnd will only be lifted when user performs transaction
                 Status = Status.Active,
-                Balance = 0
+                Balance = 0,
+                WalletNumber = walletNumber
             };
 
+            wallet.CheckSum = wallet.GetCheckSum();
             return wallet;
-        }
-
-        public void BalanceUpdate(decimal amount)
-        {
-            if (!this.ValidateWalletCheckSum())
-                return;
-
-            Balance += amount;
-            this.GetCheckSum();
-        }
-
-
-
+        }    
     }
 }

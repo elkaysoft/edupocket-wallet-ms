@@ -17,7 +17,7 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
         public string Gender { get; private set; }        
         public string? ProfileImage { get; private set; }
         public string? TransactionPinHash { get; private set; }
-        public ProfileType ProfileType { get; private set; }
+        public ProfileType UserType { get; private set; }
         public Beneficiary beneficiary { get; private set; }
         public Wallet Wallet { get; set; }
 
@@ -34,32 +34,25 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
                 FirstName = profile.firstName,
                 LastName = profile.lastName,
                 OtherName = profile.otherName,
-                ProfileType = profile.profileType,
-                ProfileImage = profile.profileImage,
+                UserType = profile.userType
             };
             return newProfile;
         }
 
 
-        public Wallet CreateWallet(Guid profileId, Guid walletSchemeId, string walletNumber)
+        public Wallet CreateWallet(Guid profileId, string walletNumber)
         {
-            if (string.IsNullOrEmpty(walletNumber)) throw new ArgumentException("Wallet number is required");
-            if (walletSchemeId == Guid.Empty) throw new ArgumentException("Wallet Scheme Id is required");
+            if (string.IsNullOrEmpty(walletNumber)) throw new ArgumentException("Wallet number is required");            
             if (profileId == Guid.Empty) throw new ArgumentException("Profile Id is required");
             if (walletNumber.Length < 10) throw new ArgumentException("Wallet Number must be 10 digits");
-            if (int.Parse(walletNumber) < 0) throw new ArgumentException("Invalid Wallet number");
+            long walletNum = long.Parse(walletNumber);
+            if (walletNum < 0) throw new ArgumentException("Invalid Wallet number");
 
             var userWallet = Wallet.Create(profileId, walletNumber);
             userWallet.GetCheckSum();
             return userWallet;
         }
-
-        public void UpdateWalletBalance(decimal balance)
-        {
-            if(balance == 0) return;
-
-            Wallet.BalanceUpdate(balance);
-        }
+        
 
         public void Update(string firstName, string lastName, string otherName, string emailAddress, string mobileNumber)
         {

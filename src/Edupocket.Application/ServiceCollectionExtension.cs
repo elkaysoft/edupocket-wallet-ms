@@ -1,6 +1,14 @@
-﻿namespace Edupocket.Application;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
-public class ServiceCollectionExtension
+namespace Edupocket.Application;
+
+public static class ServiceCollectionExtension
 {
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    {
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
+        return services;
+    }
 }

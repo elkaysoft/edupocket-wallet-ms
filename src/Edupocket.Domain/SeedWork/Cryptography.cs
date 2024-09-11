@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,6 +26,34 @@ namespace Edupocket.Domain.SeedWork
                 }
                 return new string(generated);
             }
+
+            /// <summary>
+            /// Define the length of characters to generate
+            /// </summary>
+            /// <param name="length"></param>
+            /// <returns></returns>
+            public static string GenerateRandomNumber(int length)
+            {
+                string result = string.Empty;
+                string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
+                string sTempChars = string.Empty;
+
+                Random random = new Random();
+
+                for (int i = 0; i < length; i++)
+                {
+                    int p = random.Next(0, saAllowedCharacters.Length);
+                    sTempChars = saAllowedCharacters[random.Next(0, saAllowedCharacters.Length)];
+                    result += sTempChars;
+                }
+
+                return result;
+            }
+
+
+
         }
+
+
     }
 }
