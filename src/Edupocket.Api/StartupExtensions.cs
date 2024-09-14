@@ -1,15 +1,31 @@
 ﻿using Edupocket.Application;
 using Edupocket.DAL;
+using System.Reflection;
 
 namespace Edupocket.Api
 {
+    /// <summary>
+    /// StartExtensions
+    /// </summary>
     public static class StartupExtensions
     {
-        // Add services to the container.
+        /// <summary>
+        /// Configure the services
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
         public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
         {
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(p =>
+            {
+                p.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Edupocket Wallet System", Version = "v1" });
+                var xmlFileName = $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFileName);
+
+                p.IncludeXmlComments(xmlPath);
+
+            });
 
             builder.Services.AddApplicationServices();
             builder.Services.AddDataAccessServices(builder.Configuration);
@@ -41,7 +57,7 @@ namespace Edupocket.Api
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(x =>
-                {
+                {                   
                     x.SwaggerEndpoint("/swagger/v1/swagger.json", "Edupocket Wallet API");
                 });
             }

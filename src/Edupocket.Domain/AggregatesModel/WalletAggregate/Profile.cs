@@ -17,8 +17,7 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
         public string Gender { get; private set; }        
         public string? ProfileImage { get; private set; }
         public string? TransactionPinHash { get; private set; }
-        public ProfileType UserType { get; private set; }
-        public Beneficiary beneficiary { get; private set; }
+        public ProfileType UserType { get; private set; }        
         public Wallet Wallet { get; set; }
 
 
@@ -70,7 +69,7 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
        
         public void UpdateProfileImage(string imageUrl)
         {
-            if (string.IsNullOrEmpty(imageUrl)) throw new ArgumentException("Image URL is required");
+            if (string.IsNullOrEmpty(imageUrl)) throw new ArgumentException("Image is required");
 
             ProfileImage = imageUrl;
         }
@@ -83,10 +82,7 @@ namespace Edupocket.Domain.AggregatesModel.WalletAggregate
             if (string.IsNullOrWhiteSpace(nickName)) throw new ArgumentException("Beneficiary nickName is required");
 
            return new Beneficiary(name, walletNum, nickName);   
-        }
-
-
-        
+        }        
 
 
     }

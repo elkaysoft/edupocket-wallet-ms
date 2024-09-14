@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Edupocket.Application.ResponseModels;
 
-namespace Edupocket.Application.ResponseModels
+namespace Edupocket.Application.DTO
 {
-    public class CreateWalletResponse: BaseResponse
+    public class CreateWalletResponse : BaseResponse
     {
-        public CreateWalletResponse(): base()
-        {            
+        public CreateWalletResponse() : base()
+        {
         }
 
 
-        public CreateWalletDto Result { get; set; }
+        public CreateWalletDetails Result { get; set; } = default!;
     }
 
-    public class CreateWalletDto
+    public class CreateWalletDetails
     {
         public string WalletNumber { get; set; }
         public string FirstName { get; set; }

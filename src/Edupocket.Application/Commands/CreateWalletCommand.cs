@@ -1,4 +1,4 @@
-﻿using Edupocket.Application.ResponseModels;
+﻿using Edupocket.Application.DTO;
 using Edupocket.Domain.AggregatesModel.WalletAggregate;
 using MediatR;
 using System;

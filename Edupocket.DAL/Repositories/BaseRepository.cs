@@ -2,13 +2,7 @@
 using Edupocket.Infrastructure;
 using Edupocket.Infrastructure.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Edupocket.DAL.Repositories
 {

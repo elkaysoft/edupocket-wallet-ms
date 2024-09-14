@@ -1,6 +1,6 @@
 ﻿using Edupocket.Application.Commands;
+using Edupocket.Application.DTO;
 using Edupocket.Application.Exceptions;
-using Edupocket.Application.ResponseModels;
 using Edupocket.Application.Validations;
 using Edupocket.DAL.Contracts;
 using Edupocket.Domain.AggregatesModel.WalletAggregate;
@@ -52,7 +52,7 @@ namespace Edupocket.Application.Handlers
 
                 _unitOfWork.CommitTransaction();
 
-                response.Result = new CreateWalletDto
+                response.Result = new CreateWalletDetails
                 {
                     FirstName = request.FirstName,
                     LastName = profile.LastName,

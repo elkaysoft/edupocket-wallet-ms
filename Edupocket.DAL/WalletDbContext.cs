@@ -19,11 +19,7 @@ public class WalletDbContext: DbContext
     {
         modelBuilder.Entity<Wallet>().ToTable("Wallets").Property(t => t.Status).HasConversion<string>();
         modelBuilder.Entity<Profile>().ToTable("Profiles").Property(t => t.UserType).HasConversion<string>();
-
-        modelBuilder.Entity<Profile>().OwnsOne(o => o.beneficiary).Property(t => t.NickName).HasColumnName("BeneficiaryNickName").HasMaxLength(50);
-        modelBuilder.Entity<Profile>().OwnsOne(o => o.beneficiary).Property(t => t.Name).HasColumnName("BeneficiaryAccountName").HasMaxLength(100);
-        modelBuilder.Entity<Profile>().OwnsOne(o => o.beneficiary).Property(t => t.WalletNumber).HasColumnName("BeneficiaryWalletNumber").HasMaxLength(15);
-
+       
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
             var parameter = Expression.Parameter(entityType.ClrType, "p");
