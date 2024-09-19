@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Edupocket.Domain\Edupocket.Domain.csproj" />
+    <ProjectReference Include="..\Edupocket.Domain\Edupocket.Domain.csproj" />
   </ItemGroup>
 
 </Project>

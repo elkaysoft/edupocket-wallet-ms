@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Edupocket.Domain.SeedWork
 {
-    public class AuditableEntity
+    public abstract class AuditableEntity
     {
         public string CreatedBy { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;

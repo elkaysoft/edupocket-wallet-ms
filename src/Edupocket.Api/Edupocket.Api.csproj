@@ -14,8 +14,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Edupocket.DAL\Edupocket.DAL.csproj" />
+  <ItemGroup>    
     <ProjectReference Include="..\Edupocket.Application\Edupocket.Application.csproj" />
   </ItemGroup>
 
